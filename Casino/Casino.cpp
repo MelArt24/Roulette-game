@@ -1,5 +1,5 @@
 #include <iostream>
-#include <windows.h> // to access the window
+#include <windows.h> // to have access to the window
 
 #include <thread> // for time delaying
 
