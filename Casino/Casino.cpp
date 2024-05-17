@@ -1,17 +1,17 @@
 #include <iostream>
-#include <windows.h> // для доступу до вікна / to access the window
+#include <windows.h> // to access the window
 
-#include <thread> // для затримки часу / for time delaying
+#include <thread> // for time delaying
 
 #include <random>
 
-#include <fstream> // для ofstream та ifstream / for ofstream and ifstream
-#include <sstream> // для stringstream / for stringstream
+#include <fstream> // for ofstream and ifstream
+#include <sstream> // for stringstream
 #include <string>
 #include <map>
-#include <conio.h> // для _getch() / for _getch()
+#include <conio.h> // for _getch()
 
-#include <iomanip> // для std::setw() / for std::setw()
+#include <iomanip> // for std::setw()
 
 struct User 
 {
@@ -22,9 +22,8 @@ struct User
 
 std::string currentUserLogin;
 
-void gameOption(std::map<std::string, User>& users); // прототип функції gameOption() / gameOption() function prototype
+void gameOption(std::map<std::string, User>& users); // gameOption() function prototype
 
-// Функція для виведення поля 
 // Function for field output
 void NumField()
 {
@@ -37,7 +36,6 @@ void NumField()
     }
 }
 
-// Функція для зміни кольору поля з обраним числом
 // Function for changing the color of the field with the selected number
 void PaintNum(int &number)
 {
@@ -70,8 +68,7 @@ void PaintNum(int &number)
     SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 
-// Функція для виведення введеного Вами числа
-// A function for outputting the number you entered
+// Function for outputting the number you entered
 void PositionAfterInputNumber(int &number)
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -87,7 +84,6 @@ void PositionAfterInputNumber(int &number)
         std::cout << "It is not a number from 1 to 30. Your number: " << number << "   " << std::endl;
 }
 
-// Функція для збереження логіна та пароля
 // Function for saving login and password
 void saveToFile(const std::map<std::string, User>& users, const std::string& filename)
 {
@@ -104,7 +100,6 @@ void saveToFile(const std::map<std::string, User>& users, const std::string& fil
         std::cerr << "Error of opening." << std::endl;
 }
 
-// Функція для реєстрації гравця
 // Player registration function
 void registerUser(std::map<std::string, User>& users)
 {
@@ -139,13 +134,12 @@ void registerUser(std::map<std::string, User>& users)
         }
     }
 
-    newUser.balance = 1000; // Початковий баланс для гри / Starting balance for the game
+    newUser.balance = 1000; // Starting balance for the game
 
     users[newUser.login] = newUser;
     std::cout << "\nNew user registered!" << std::endl;
 }
 
-// Функція для входу користувача
 // Function for user login
 void loginUser(const std::map<std::string, User>& users)
 {
@@ -166,11 +160,10 @@ void loginUser(const std::map<std::string, User>& users)
         }
         else
         {
-            validLogin = true;  // Логін знайдено, можемо вийти з циклу / The login is found, we can exit the loop
+            validLogin = true;  // The login is found, we can exit the loop
         }
     } while (!validLogin);
 
-    // Тепер введений правильний логін, можемо приступити до вводу паролю
     // The correct login has been entered, we can start entering the password
 
     currentUserLogin = login;
@@ -217,7 +210,6 @@ void loginUser(const std::map<std::string, User>& users)
     } while (!ifCorrectPassword);
 }
 
-// Функція для завантаження даних з файлу
 // Function for downloading data from a file
 auto loadFromFile(std::map<std::string, User>& users, const std::string& filename)
 {
@@ -244,7 +236,6 @@ auto loadFromFile(std::map<std::string, User>& users, const std::string& filenam
     }
 }
 
-// Функція для зміни балансу гравця (для адміна)
 // Function for changing player balance (for admin)
 void changeBalance(std::map<std::string, User>& users)
 {
@@ -293,7 +284,7 @@ void changeBalance(std::map<std::string, User>& users)
             }
         }
 
-        // Перевірка пароля / Password verification
+        // Password verification
         if (inputPassword == "15924866")
         {
             correctPassword = true;
@@ -319,7 +310,6 @@ void changeBalance(std::map<std::string, User>& users)
     system("cls");
 }
 
-// Функція для гри
 // Game function
 void Game1(std::map<std::string, User>& users)
 {
@@ -384,7 +374,6 @@ void Game1(std::map<std::string, User>& users)
     }
 }
 
-// Функція для виведення режимів гри
 // Function for outputing game modes
 void gameOption(std::map<std::string, User>& users)
 {
@@ -417,7 +406,6 @@ void gameOption(std::map<std::string, User>& users)
     }
 }
 
-// Функція для виведення режимів програми
 // Function for outputting program modes
 void displayMenu()
 {
@@ -425,7 +413,7 @@ void displayMenu()
     std::cout << "1. Registration" << std::endl;
     std::cout << "2. Entrance" << std::endl;
     std::cout << "3. Change balance (for admin)" << std::endl;
-    std::cout << "4. Exit" << std::endl;  // Додаємо опцію для виходу
+    std::cout << "4. Exit" << std::endl;
 }
 
 int main()
